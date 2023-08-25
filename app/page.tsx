@@ -13,7 +13,6 @@ export default function Home() {
           fill
           objectFit="cover"
         />
-        //
         <Conversation />
       </div>
     </main>
