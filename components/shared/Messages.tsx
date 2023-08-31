@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Header from "../Conversation/Header";
 function Messages() {
   return (
@@ -34,15 +33,68 @@ function Messages() {
         exercitationem nulla maxime hic placeat. Lorem ipsum dolor, sit amet
         consectetur adipisicing elit. Temporibus culpa esse quod reiciendis
         iste, alias ipsam nesciunt doloribus blanditiis delectus tempora maiores
+        ratione, at aliquid exercitationem nulla maxime hic placeat. Lorem ipsum
+        dolor, sit amet consectetur adipisicing elit. Temporibus culpa esse quod
+        reiciendis iste, alias ipsam nesciunt doloribus blanditiis delectus
+        tempora maiores ratione, at aliquid exercitationem nulla maxime hic
+        placeat. Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+        Temporibus culpa esse quod reiciendis iste, alias ipsam nesciunt
+        doloribus blanditiis delectus tempora maiores ratione, at aliquid
+        exercitationem nulla maxime hic placeat. Lorem ipsum dolor, sit amet
+        consectetur adipisicing elit. Temporibus culpa esse quod reiciendis
+        iste, alias ipsam nesciunt doloribus blanditiis delectus tempora maiores
+        ratione, at aliquid exercitationem nulla maxime hic placeat. Lorem ipsum
+        dolor, sit amet consectetur adipisicing elit. Temporibus culpa esse quod
+        reiciendis iste, alias ipsam nesciunt doloribus blanditiis delectus
+        tempora maiores ratione, at aliquid exercitationem nulla maxime hic
+        placeat. Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+        Temporibus culpa esse quod reiciendis iste, alias ipsam nesciunt
+        doloribus blanditiis delectus tempora maiores ratione, at aliquid
+        exercitationem nulla maxime hic placeat. Lorem ipsum dolor, sit amet
+        consectetur adipisicing elit. Temporibus culpa esse quod reiciendis
+        iste, alias ipsam nesciunt doloribus blanditiis delectus tempora maiores
+        ratione, at aliquid exercitationem nulla maxime hic placeat. Lorem ipsum
+        dolor, sit amet consectetur adipisicing elit. Temporibus culpa esse quod
+        reiciendis iste, alias ipsam nesciunt doloribus blanditiis delectus
+        tempora maiores ratione, at aliquid exercitationem nulla maxime hic
+        placeat. Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+        Temporibus culpa esse quod reiciendis iste, alias ipsam nesciunt
+        doloribus blanditiis delectus tempora maiores ratione, at aliquid
+        exercitationem nulla maxime hic placeat. Lorem ipsum dolor, sit amet
+        consectetur adipisicing elit. Temporibus culpa esse quod reiciendis
+        iste, alias ipsam nesciunt doloribus blanditiis delectus tempora maiores
+        ratione, at aliquid exercitationem nulla maxime hic placeat. Lorem ipsum
+        dolor, sit amet consectetur adipisicing elit. Temporibus culpa esse quod
+        reiciendis iste, alias ipsam nesciunt doloribus blanditiis delectus
+        tempora maiores ratione, at aliquid exercitationem nulla maxime hic
+        placeat. Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+        Temporibus culpa esse quod reiciendis iste, alias ipsam nesciunt
+        doloribus blanditiis delectus tempora maiores ratione, at aliquid
+        exercitationem nulla maxime hic placeat. Lorem ipsum dolor, sit amet
+        consectetur adipisicing elit. Temporibus culpa esse quod reiciendis
+        iste, alias ipsam nesciunt doloribus blanditiis delectus tempora maiores
+        ratione, at aliquid exercitationem nulla maxime hic placeat. Lorem ipsum
+        dolor, sit amet consectetur adipisicing elit. Temporibus culpa esse quod
+        reiciendis iste, alias ipsam nesciunt doloribus blanditiis delectus
+        tempora maiores ratione, at aliquid exercitationem nulla maxime hic
+        placeat. Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+        Temporibus culpa esse quod reiciendis iste, alias ipsam nesciunt
+        doloribus blanditiis delectus tempora maiores ratione, at aliquid
+        exercitationem nulla maxime hic placeat. Lorem ipsum dolor, sit amet
+        consectetur adipisicing elit. Temporibus culpa esse quod reiciendis
+        iste, alias ipsam nesciunt doloribus blanditiis delectus tempora maiores
+        ratione, at aliquid exercitationem nulla maxime hic placeat. Lorem ipsum
+        dolor, sit amet consectetur adipisicing elit. Temporibus culpa esse quod
+        reiciendis iste, alias ipsam nesciunt doloribus blanditiis delectus
+        tempora maiores ratione, at aliquid exercitationem nulla maxime hic
+        placeat. Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+        Temporibus culpa esse quod reiciendis iste, alias ipsam nesciunt
+        doloribus blanditiis delectus tempora maiores ratione, at aliquid
+        exercitationem nulla maxime hic placeat. Lorem ipsum dolor, sit amet
+        consectetur adipisicing elit. Temporibus culpa esse quod reiciendis
+        iste, alias ipsam nesciunt doloribus blanditiis delectus tempora maiores
         ratione, at aliquid exercitationem nulla maxime hic placeat.
       </p>
-      <Image
-        className="bgImage"
-        src="/assets/bg.svg"
-        alt="Backgound image"
-        priority
-        fill
-      />
     </>
   );
 }

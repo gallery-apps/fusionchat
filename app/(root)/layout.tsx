@@ -30,14 +30,14 @@ export default function RootLayout({
     >
       <html lang="en">
         <body className={inter.className}>
-          <Topbar />
-          <main className="flex flex-row">
+          <div className="container">
+            <Topbar />
             <LeftSidebar />
             <section className="main-container">
               <div className="w-full">{children}</div>
             </section>
-          </main>
-          <Bottombar />
+            <Bottombar />
+          </div>
         </body>
       </html>
     </ClerkProvider>

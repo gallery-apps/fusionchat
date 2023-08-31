@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 function LeftSidebar() {
   const router = useRouter();
   return (
-    <section className="custom-scrollbar leftsidebar">
+    <section className="leftsidebar">
       <div className="flex flex-row w-full gap6 px-6 h-1/5">
         {sidebarLinks.map((link) => {
           console.log(link);
