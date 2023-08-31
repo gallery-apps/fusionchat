@@ -8,7 +8,7 @@ import "../globals.css";
 import Topbar from "@/components/shared/Topbar";
 import LeftSidebar from "@/components/shared/LeftSidebar";
 import Bottombar from "@/components/shared/Bottombar";
-import RightSidebar from "@/components/shared/RightSidebar";
+import RightSidebar from "@/components/shared/Messages";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,10 +31,10 @@ export default function RootLayout({
       <html lang="en">
         <body className={inter.className}>
           <Topbar />
-          <main>
+          <main className="flex flex-row">
             <LeftSidebar />
             <section className="main-container">
-              <div className="w-full max-w-4xl">{children}</div>
+              <div className="w-full">{children}</div>
             </section>
           </main>
           <Bottombar />

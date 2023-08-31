@@ -1,7 +1,11 @@
+import Messages from "@/components/shared/Messages";
+
 export default function Home() {
   return (
     <>
-        <h1 className="head-text text-left">Conversation</h1>
+      <section className="flex flex-col gap-10">
+        <Messages />
+      </section>
     </>
   );
 }
