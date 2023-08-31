@@ -23,7 +23,7 @@ const formSchema = z.object({
 });
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserValidation } from "@/lib/valiadations/uuser";
+import { UserValidation } from "@/lib/valiadations/user";
 import { updateUser } from "@/lib/actions/user.actions";
 
 interface Props {
