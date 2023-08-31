@@ -4,8 +4,10 @@ import Image from "next/image";
 export default function Home() {
   return (
     <main className="flex h-screen overflow-hidden">
-      <div className="w-1/3 overflow-y-auto bg-white-500">chatsidebar</div>
-      <div className="w-full overflow-y-auto relative">
+      <div className="w-1/3 overflow-y-auto bg-white-500">Settings</div>
+      <div className="w-1/3 overflow-y-auto bg-white-500">Contacts</div>
+      <div className="w-1/3 overflow-y-auto bg-white-500">Recents</div>
+      <div className="w-full overflow-y-auto relative"> 
         <Image
           className="bgImage"
           src="/bg.svg"
