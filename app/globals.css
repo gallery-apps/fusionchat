@@ -33,7 +33,7 @@
   }
 
   .topbar {
-    @apply flex bg-gray-800;
+    @apply flex justify-between m-1 bg-gray-800;
   }
 }
 
