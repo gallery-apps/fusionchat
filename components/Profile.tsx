@@ -37,7 +37,7 @@ interface Props {
   btnTitle: string;
 }
 
-const AccountProfile = ({ user, btnTitle }: Props) => {
+const Profile = ({ user }: Props) => {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -54,7 +54,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
       name: values.name,
       path: pathname,
       username: values.username,
-      userId: user.id,
+      id: user.id,
       image: "",
     });
 
@@ -90,4 +90,4 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
   );
 };
 
-export default AccountProfile;
+export default Profile;

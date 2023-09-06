@@ -1,5 +1,5 @@
 import React from "react";
-import AccountProfile from "@/components/forms/AccountProfile";
+import AccountProfile from "@/components/Profile";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 

@@ -1,6 +1,7 @@
 "use server";
 
 import User from "../models/user.model";
+import { SortOrder } from "mongoose";
 import { connectToDB } from "../mongoose";
 import { revalidatePath } from "next/cache";
 
@@ -8,14 +9,14 @@ export async function fetchUser(userId: string) {
   try {
     connectToDB();
 
-    return await User.findOne({ id: userId })
+    return await User.findOne({ id: userId });
   } catch (error: any) {
     throw new Error(`Failed to fetch user: ${error.message}`);
   }
 }
 
-interface Params {
-  userId: string;
+export interface User {
+  id: string;
   username: string;
   name: string;
   image: string;
@@ -23,17 +24,17 @@ interface Params {
 }
 
 export async function updateUser({
-  userId,
+  id,
   name,
   path,
   username,
   image,
-}: Params): Promise<void> {
+}: User): Promise<void> {
   try {
     connectToDB();
 
     await User.findOneAndUpdate(
-      { id: userId },
+      { id: id },
       {
         username: username.toLowerCase(),
         name,
@@ -51,4 +52,16 @@ export async function updateUser({
   }
 }
 
-
+export async function fetchUsers({
+  sortBy = "desc",
+}: { sortBy?: SortOrder | "desc" } = {}): Promise<any> {
+  try {
+    connectToDB();
+    const sortOptions = { createdAt: sortBy };
+    const users = await User.find().sort(sortOptions);
+    return { users };
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    throw error;
+  }
+}
