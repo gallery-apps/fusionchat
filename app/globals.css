@@ -2,6 +2,98 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  /* main */
+  .main-container {
+    @apply flex flex-col items-center dark:bg-gray-800 pb-10 max-md:pb-32;
+    grid-area: main;
+    background-image: url("/assets/bg.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+
+  /* Head Text */
+  .head-text {
+    @apply text-4xl font-bold;
+  }
+
+  /* Left Sidebar */
+
+  .leftsidebar {
+    @apply flex w-fit flex-col justify-between;
+  }
+
+  .leftsidebar_link {
+    @apply relative flex justify-start gap-4 rounded-lg p-4 flex-col;
+  }
+
+  .leftsidebar_link img {
+    @apply self-center;
+  }
+
+  .topbar {
+    @apply flex justify-between m-1 bg-gray-800;
+  }
+}
+
+@layer utilities {
+  .container {
+    display: grid;
+    grid-template-areas:
+      "header header"
+      "left main"
+      "footer footer";
+    grid-template-rows: 3rem auto 3rem;
+    grid-template-columns: 1fr 3fr;
+    padding: 0;
+    height: 100vh;
+  }
+
+  .topbar {
+    grid-area: header;
+  }
+
+  .leftsidebar {
+    grid-area: left;
+  }
+
+  .main-container {
+    grid-area: main;
+  }
+
+  .bottombar {
+    grid-area: footer;
+  }
+
+  .css-invert {
+    @apply invert-[50%] brightness-200;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+    border-radius: 2px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #09090a;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #5c5c7b;
+    border-radius: 50px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #7878a3;
+  }
+
+  .bgImage {
+    object-fit: cover;
+  }
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
