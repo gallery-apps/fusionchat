@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import { redirect } from "next/navigation";
 
 import "../globals.css";
 import Topbar from "@/components/Topbar";
@@ -25,7 +26,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const user = await currentUser();
-  if (!user) return null; // to avoid typescript warnings
+  if (!user)  redirect("/sign-in");
   const id = user.id;
   const data = await fetchUsers();
   const rawUsers = JSON.parse(JSON.stringify(data.users))
