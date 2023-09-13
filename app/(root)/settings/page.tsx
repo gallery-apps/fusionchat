@@ -26,13 +26,19 @@ export default function SettingsPage() {
   );
 }
 
-function SettingsSection({ title, children }) {
+function SettingsSection({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 mb-4">
-      <h2 className="text-xl font-semibold mb-2">{title}</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {children}
-      </div>
+    <div className="bg-white rounded-lg shadow-md mb-4 flex-row flex-start">
+      <h2 className=" font-semibold mb-2 text-green-800 py-1 pl-2">
+        {title}
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">{children}</div>
     </div>
   );
 }
