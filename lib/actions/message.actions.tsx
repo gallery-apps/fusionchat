@@ -1,5 +1,5 @@
 "use server";
-
+import { revalidatePath } from "next/cache";
 import Messages from "../models/message.model";
 import Message from "../models/message.model";
 import { connectToDB } from "../mongoose";
@@ -9,12 +9,14 @@ export interface Message {
   recipientId: string;
   messageContent: string;
   timeStamp: string;
+  path: string;
 }
 
 export async function createMessage({
   senderId,
   recipientId,
   messageContent,
+  path
 }: Message): Promise<void> {
   try {
     connectToDB();
@@ -24,6 +26,7 @@ export async function createMessage({
       recipientId,
       messageContent,
     });
+    revalidatePath(path);
   } catch (error: any) {
     throw new Error(`Failed to create/update user: ${error.message}`);
   }
