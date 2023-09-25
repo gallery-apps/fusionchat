@@ -26,9 +26,9 @@ function Messages({
   recipient,
   messages,
 }: {
-  user: User;
-  recipient: User;
-  messages: Message[];
+    user: User;
+    recipient: User;
+    messages: Message[];
   }) {
   const pathname = usePathname();
   const form = useForm({
@@ -52,7 +52,7 @@ function Messages({
   return (
     <div className="z-10 m-6 inherit">
       <Header user={recipient} />
-      <HistoryMessages messages={messages} />
+      <HistoryMessages messages={messages} user={user} />
       <Form {...form}>
         <form
           className="mt-10 flex flex-col justify-start gap-10"

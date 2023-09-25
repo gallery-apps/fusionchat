@@ -26,21 +26,23 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const user = await currentUser();
-  if (!user)  redirect("/sign-in");
+  if (!user) redirect("/sign-in");
   const id = user.id;
   const data = await fetchUsers();
-  const rawUsers = JSON.parse(JSON.stringify(data.users))
+  const rawUsers = JSON.parse(JSON.stringify(data.users));
 
-  const users = rawUsers.filter((user: User)=> user.id !== id).map((user: User) => {
-    let newUser: User = {
-      id: user.id,
-      username: user.username,
-      name: user.name,
-      image: user.image,
-      path: user.path,
-    };
-    return newUser;
-  });
+  const users = rawUsers
+    .filter((user: User) => user.id !== id)
+    .map((user: User) => {
+      let newUser: User = {
+        id: user.id,
+        username: user.username,
+        name: user.name,
+        image: user.image,
+        path: user.path,
+      };
+      return newUser;
+    });
   return (
     <ClerkProvider
       appearance={{

@@ -1,4 +1,3 @@
-
 import Messages from "@/components/Messages";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
@@ -7,10 +6,20 @@ import { User } from "@/lib/actions/user.actions";
 import { Message } from "@/lib/actions/message.actions";
 
 async function Page({ params }: { params: { id: string } }) {
-  console.log("params", params);
-
   const rawCurentUser = await currentUser();
   if (!rawCurentUser) return null;
+
+  const mapMessages = (messages: Message[]) =>
+    messages.map((message: Message) => {
+      let newMessage: Message = {
+        messageContent: message.messageContent,
+        recipientId: message.recipientId,
+        senderId: message.senderId,
+        timeStamp: message.timeStamp,
+        path: "",
+      };
+      return newMessage;
+    });
 
   const rawRecipient = await fetchUser(params.id);
   const rawUser = await fetchUser(rawCurentUser.id);
@@ -31,19 +40,14 @@ async function Page({ params }: { params: { id: string } }) {
     path: rawRecipient.path,
   };
 
-  const data = await fetchMessages({ senderId: user.id });
-
+  const data = await fetchMessages({
+    senderId: user.id,
+    recipientId: recipient.id,
+  });
+  let messages = data.messages;
   const rawMessages = JSON.parse(JSON.stringify(data?.messages));
 
-  const messages = rawMessages.map((message: Message) => {
-    let newMessage: Message = {
-      messageContent: message.messageContent,
-      recipientId: message.recipientId,
-      senderId: message.senderId,
-      timeStamp: message.timeStamp,
-    };
-    return newMessage;
-  });
+  messages = mapMessages(rawMessages);
 
   return (
     <div>
