@@ -34,12 +34,20 @@ export async function createMessage({
 
 export async function fetchMessages({
   senderId,
+  recipientId,
 }: {
   senderId: string;
+  recipientId: string;
 }): Promise<any> {
   try {
     connectToDB();
-    const messages = await Messages.find({ senderId: senderId });
+    const messages = await Messages.find({
+      $or: [
+        { $and: [{ senderId: senderId }, { recipientId: recipientId }] },
+        { $and: [{ senderId: recipientId }, { recipientId: senderId }] },
+      ],
+    })
+    console.log(messages);
     return { messages };
   } catch (error) {
     console.error("Error fetching users:", error);
