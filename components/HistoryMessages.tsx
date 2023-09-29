@@ -6,25 +6,26 @@ export default function HistoryMessages({
   messages,
   user,
 }: {
-    messages: Message[];
-    user: User;
+  messages: Message[];
+  user: User;
 }) {
   return (
-    <div>
-      <h1>All Messages</h1>
-      {messages?.map((message, index) => {
-        if (message.senderId === user.id)
-          return (
-            <div className="text-right text-green-300" key={index}>
-              {message.messageContent}
-            </div>
-          );
-        return (
-          <div className="text-red-300" key={index}>
+    <div className="w-full h-full flex flex-col items-stretch">
+      <div className="bg-teal-500 text-white py-2 text-center">
+        <h1 className="text-lg font-bold">All Messages</h1>
+      </div>
+      <div className="flex-none flex flex-col items-start overflow-y-auto p-4">
+        {messages?.map((message, index) => (
+          <div
+            key={index}
+            className={`rounded p-4 mb-4 max-w-content ${
+              message.senderId === user.id ? "bg-teal-200 bg-opacity-75 self-end" : "bg-gray-200 bg-opacity-75 self-start"
+            }`}
+          >
             {message.messageContent}
           </div>
-        );
-      })}
+        ))}
+      </div>
     </div>
   );
 }
