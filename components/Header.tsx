@@ -6,10 +6,11 @@ import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { ClickAwayListener, IconButton } from "@mui/material";
 import { User } from "@/lib/actions/user.actions";
-function Header ({user}: {user: User}){
+
+function Header({ user }: { user: User }) {
   return (
     <div className="w-full sticky top-0 p-2 h-20 bg-gray-200 border-b border-gray-400 z-10 flex items-center justify-between">
-      <div>
+      <div style={{ color: "black" }}> 
         <AccountCircleIcon />
         {user.username}
       </div>
@@ -30,6 +31,7 @@ function Header ({user}: {user: User}){
       </div>
     </div>
   );
-};
+}
 
 export default Header;
+
