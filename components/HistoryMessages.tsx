@@ -40,7 +40,7 @@ const HistoryMessages: React.FunctionComponent<HistoryMessagesProps> = ({ messag
                   message.senderId === user.id ? "bg-teal-200 bg-opacity-75 self-end ml-auto" : "bg-gray-200 bg-opacity-75 self-start mr-auto"
                 }`}
               >
-                <div style={{ whiteSpace: "nowrap" }}>{message.messageContent}</div>
+                <div className="whitespace-normal">{message.messageContent}</div>
                 <div className="text-xs text-gray-500 absolute bottom-1 right-1">{time}</div>
               </div>
             </div>

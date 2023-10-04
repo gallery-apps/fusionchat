@@ -10,7 +10,7 @@ import { User } from "@/lib/actions/user.actions";
 function Header({ user }: { user: User }) {
   return (
     <div className="w-full sticky top-0 p-2 h-20 bg-gray-200 border-b border-gray-400 z-10 flex items-center justify-between">
-      <div style={{ color: "black" }}> 
+      <div className="text-black"> 
         <AccountCircleIcon />
         {user.username}
       </div>
