@@ -11,31 +11,26 @@ import Contacts from "./Contacts";
 function LeftSidebar({ users }: { users: User[] }) {
   const router = useRouter();
   const path = usePathname();
+
   return (
     <section className="leftsidebar">
       <div className="flex flex-col h-screen w-full px-6">
-        <div className="flex flex-row w-full gap6 px-6 h-1/5">
-          {sidebarLinks.map((link) => {
-            return (
-              <Link
-                href={link.route}
-                key={link.label}
-                className="leftsidebar_link"
-              >
+        <div className="flex flex-row w-full gap-6 px-6 h-1/5">
+          {sidebarLinks.map((link) => (
+            <Link href={link.route} key={link.label} passHref>
+              <div className={`leftsidebar_link ${path === link.route ? 'text-teal-500 font-bold' : 'text-gray-700'}`}>
                 <Image
                   src={link.imgURL}
                   alt={link.label}
                   width={24}
                   height={24}
                 />
-                <p className="text-light-1 max-lg:hidden">{link.label}</p>
-              </Link>
-            );
-          })}
+                <span className="ml-2">{link.label}</span>
+              </div>
+            </Link>
+          ))}
         </div>
-        {path.includes("/contacts") ? (
-          <Contacts users={users} path={"/contacts"} />
-        ) : null}
+        {path.includes("/contacts") ? <Contacts users={users} path={"/contacts"} /> : null}
       </div>
       <div className="mt-10 px-6">
         <SignedIn>

@@ -13,7 +13,7 @@ function Contacts({ users, path }: { users: User[]; path: string }) {
           path: user.path,
         };
         return (
-          <div key={user.id}>
+          <div key={user.id} className="mb-4 bg-gray-200 p-4 rounded-md shadow-md">
             <Link href={`${path}/${currentUser.id}`}>
               {currentUser.username}
             </Link>
