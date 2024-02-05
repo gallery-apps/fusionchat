@@ -2,56 +2,28 @@ import Messages from "@/components/Messages";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import { fetchMessages } from "@/lib/actions/message.actions";
-import { User } from "@/lib/actions/user.actions";
-import { Message } from "@/lib/actions/message.actions";
 
 async function Page({ params }: { params: { id: string } }) {
-  const rawCurentUser = await currentUser();
-  if (!rawCurentUser) return null;
+  const user = await currentUser();
 
-  const mapMessages = (messages: Message[]) =>
-    messages.map((message: Message) => {
-      let newMessage: Message = {
-        messageContent: message.messageContent,
-        recipientId: message.recipientId,
-        senderId: message.senderId,
-        timeStamp: message.timeStamp,
-        path: "",
-      };
-      return newMessage;
-    });
+  if (!user) return null;
 
-  const rawRecipient = await fetchUser(params.id);
-  const rawUser = await fetchUser(rawCurentUser.id);
+  const recipient = await fetchUser(params.id);
 
-  const user: User = {
-    id: rawUser.id,
-    username: rawUser.username,
-    name: rawUser.name,
-    image: rawUser.image,
-    path: rawUser.path,
-  };
-
-  const recipient: User = {
-    id: rawRecipient.id,
-    username: rawRecipient.username,
-    name: rawRecipient.name,
-    image: rawRecipient.image,
-    path: rawRecipient.path,
-  };
-
-  const data = await fetchMessages({
+  const messages = await fetchMessages({
     senderId: user.id,
     recipientId: recipient.id,
   });
-  let messages = data.messages;
-  const rawMessages = JSON.parse(JSON.stringify(data?.messages));
-
-  messages = mapMessages(rawMessages);
+  console.log("messages", messages);
 
   return (
     <div>
-      <Messages user={user} recipient={recipient} messages={messages} />
+      <Messages
+        userId={user.id}
+        userName={user.username ? user.username : ""}
+        recipient={recipient}
+        messages={messages}
+      />
     </div>
   );
 }

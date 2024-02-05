@@ -5,7 +5,6 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { createMessage } from "@/lib/actions/message.actions";
 import { usePathname } from "next/navigation";
-import { User } from "@/lib/actions/user.actions";
 import { MessageValidation } from "@/lib/valiadations/message";
 import Header from "./Header";
 import {
@@ -19,17 +18,19 @@ import {
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import HistoryMessages from "./HistoryMessages";
-import { Message } from "@/lib/actions/message.actions";
+import { Message, User } from "@prisma/client/index.js";
 
 function Messages({
-  user,
+  userId,
+  userName,
   recipient,
   messages,
 }: {
-    user: User;
-    recipient: User;
-    messages: Message[];
-  }) {
+    userId: string;
+  userName: string;
+  recipient: User;
+  messages: Message[];
+}) {
   const pathname = usePathname();
   const form = useForm({
     //resolver: zodResolver(UserValidation),
@@ -40,10 +41,9 @@ function Messages({
 
   const onSubmit = async (values: z.infer<typeof MessageValidation>) => {
     await createMessage({
-      senderId: user.id,
+      senderId: userId,
       recipientId: recipient.id,
       messageContent: values.messageContent,
-      timeStamp: new Date().toISOString(),
       path: pathname,
     });
     form.reset();
@@ -52,7 +52,7 @@ function Messages({
   return (
     <div className="z-10 m-6 inherit">
       <Header user={recipient} />
-      <HistoryMessages messages={messages} user={user} />
+      <HistoryMessages messages={messages} userId={userId} />
       <Form {...form}>
         <form
           className="mt-10 flex flex-col justify-start gap-10"
