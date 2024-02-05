@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/nextjs": "^4.21.15",
+    "@clerk/nextjs": "^4.29.3",
     "@clerk/themes": "^1.7.5",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -38,8 +38,8 @@
     "micro": "^10.0.1",
     "mongodb": "^6.0.0",
     "mongoose": "^7.3.4",
-    "next": "13.4.10",
-    "postcss": "8.4.26",
+    "next": "13.5.1",
+    "postcss": "8.4.31",
     "prettier": "^3.0.0",
     "prisma": "^5.9.0",
     "react": "18.2.0",
@@ -51,6 +51,6 @@
     "tailwindcss-animate": "^1.0.7",
     "typescript": "5.1.6",
     "uploadthing": "^5.2.0",
-    "zod": "^3.22.2"
+    "zod": "^3.22.3"
   }
 }
