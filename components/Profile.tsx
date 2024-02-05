@@ -51,11 +51,11 @@ const Profile = ({ user }: Props) => {
 
   const onSubmit = async (values: z.infer<typeof UserValidation>) => {
     await updateUser({
-      name: values.name,
-      path: pathname,
-      username: values.username,
       id: user.id,
+      name: values.name,
+      username: values.username,
       image: "",
+      path: pathname,
     });
 
     if (pathname === "/profile/edit") {

@@ -1,26 +1,24 @@
 "use server";
 
-import User from "../models/user.model";
-import { SortOrder } from "mongoose";
-import { connectToDB } from "../mongoose";
+import { User } from "@prisma/client";
+
+import prisma from "../utils/db";
+
 import { revalidatePath } from "next/cache";
 
-export async function fetchUser(userId: string) {
+export async function fetchUser(userId: string): Promise<User> {
   try {
-    connectToDB();
+    const user = await prisma.user.findFirst({
+      where: {
+        id: userId,
+      },
+    });
 
-    return await User.findOne({ id: userId });
+    prisma.$disconnect();
+    return user;
   } catch (error: any) {
     throw new Error(`Failed to fetch user: ${error.message}`);
   }
-}
-
-export interface User {
-  id: string;
-  username: string;
-  name: string;
-  image: string;
-  path: string;
 }
 
 export async function updateUser({
@@ -30,19 +28,24 @@ export async function updateUser({
   username,
   image,
 }: User): Promise<void> {
+  console.log("updateUser", id, name, username, image, path);
   try {
-    connectToDB();
-
-    await User.findOneAndUpdate(
-      { id: id },
-      {
-        username: username.toLowerCase(),
+    await prisma.user.create({
+      data: {
+        id,
         name,
+        username: username.toLowerCase(),
         image,
+      },
+    });
+    await prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
         onboarded: true,
       },
-      { upsert: true }
-    );
+    });
 
     if (path === "/profile/edit") {
       revalidatePath(path);
@@ -52,16 +55,10 @@ export async function updateUser({
   }
 }
 
-export async function fetchUsers({
-  sortBy = "desc",
-}: { sortBy?: SortOrder | "desc" } = {}): Promise<any> {
-  try {
-    connectToDB();
-    const sortOptions = { createdAt: sortBy };
-    const users = await User.find().sort(sortOptions);
-    return { users };
-  } catch (error) {
-    console.error("Error fetching users:", error);
-    throw error;
-  }
+export async function fetchUsers() {
+  return await prisma.user.findMany({
+    orderBy: {
+      username: "asc",
+    },
+  });
 }

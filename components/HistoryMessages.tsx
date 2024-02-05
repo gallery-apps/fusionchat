@@ -1,17 +1,23 @@
 import React from "react";
-import { Message } from "@/lib/actions/message.actions";
-import { User } from "@/lib/actions/user.actions";
+import { Message } from "@prisma/client";
+import { User } from "@prisma/client";
 
 interface HistoryMessagesProps {
   messages: Message[];
-  user: User;
+  userId: string;
 }
 
-const HistoryMessages: React.FunctionComponent<HistoryMessagesProps> = ({ messages, user }) => {
+const HistoryMessages: React.FunctionComponent<HistoryMessagesProps> = ({
+  messages,
+  userId,
+}) => {
   const formatTimestamp = (timestamp: string) => {
     const dateObject = new Date(timestamp);
     const currentDate = dateObject.toDateString();
-    const currentTime = dateObject.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    const currentTime = dateObject.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
     return { date: currentDate, time: currentTime };
   };
 
@@ -37,11 +43,17 @@ const HistoryMessages: React.FunctionComponent<HistoryMessagesProps> = ({ messag
               )}
               <div
                 className={`relative rounded p-4 mb-4 max-w-content min-w-[65px] ${
-                  message.senderId === user.id ? "bg-teal-200 bg-opacity-75 self-end ml-auto" : "bg-gray-200 bg-opacity-75 self-start mr-auto"
+                  message.senderId === userId
+                    ? "bg-teal-200 bg-opacity-75 self-end ml-auto"
+                    : "bg-gray-200 bg-opacity-75 self-start mr-auto"
                 }`}
               >
-                <div className="whitespace-normal">{message.messageContent}</div>
-                <div className="text-xs text-gray-500 absolute bottom-1 right-1">{time}</div>
+                <div className="whitespace-normal">
+                  {message.messageContent}
+                </div>
+                <div className="text-xs text-gray-500 absolute bottom-1 right-1">
+                  {time}
+                </div>
               </div>
             </div>
           );

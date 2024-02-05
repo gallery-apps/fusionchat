@@ -1,36 +1,32 @@
 "use server";
+import { Message } from "@prisma/client";
+
+import prisma from "../utils/db";
+
 import { revalidatePath } from "next/cache";
-import Messages from "../models/message.model";
-import Message from "../models/message.model";
-import { connectToDB } from "../mongoose";
 
-export interface Message {
-  senderId: string;
-  recipientId: string;
-  messageContent: string;
-  timeStamp: string;
-  path: string;
-}
-
-export async function createMessage({
+export const createMessage = async ({
   senderId,
   recipientId,
   messageContent,
-  path
-}: Message): Promise<void> {
-  try {
-    connectToDB();
-
-    await Message.create({
+  path,
+}: {
+  senderId: string;
+  recipientId: string;
+  messageContent: string;
+  path: string;
+}) => {
+  await prisma.message.create({
+    data: {
+      id: crypto.randomUUID(),
+      timeStamp: new Date().toISOString(),
       senderId,
       recipientId,
       messageContent,
-    });
-    revalidatePath(path);
-  } catch (error: any) {
-    throw new Error(`Failed to create/update user: ${error.message}`);
-  }
-}
+    },
+  });
+  revalidatePath(path);
+};
 
 export async function fetchMessages({
   senderId,
@@ -39,15 +35,12 @@ export async function fetchMessages({
   senderId: string;
   recipientId: string;
 }): Promise<any> {
-  try {
-    connectToDB();
-    const messages = await Messages.find().or([
-      { senderId, recipientId },
-      { senderId: recipientId, recipientId: senderId },
-    ]);
-    return { messages };
-  } catch (error) {
-    console.error("Error fetching users:", error);
-    throw error;
-  }
+  return prisma.message.findMany({
+    where: {
+      OR: [
+        { senderId, recipientId },
+        { senderId: recipientId, recipientId: senderId },
+      ],
+    },
+  });
 }
