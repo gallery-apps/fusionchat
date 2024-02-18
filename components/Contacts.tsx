@@ -1,18 +1,27 @@
-import { User } from "@prisma/client";
+import { useSelector } from "react-redux";
+import { User } from "../redux/types";
+import { selectUserId, selectUsers } from "../redux/features/state-slice";
 
-function Contacts({ users, path, userId, username }: { users: User[]; path: string; userId: string, username: string }) {
+function Contacts({ path }: { path: string }) {
+  const users = useSelector(selectUsers);
+  const userId = useSelector(selectUserId);
   return (
-    <div className="space-y-4">
-      {users.map((currentUser: User) => {
-        if (currentUser.id === userId) return null;
-    
+    <div className="space-y-1">
+      {users.map((u: User) => {
+        if (userId === u.id) return null;
         return (
-          <div key={userId} className="flex items-center bg-gray-200 p-4 rounded-lg">
-            <div className="w-10 h-10 bg-teal-500 text-white flex items-center justify-center rounded-full mr-4">
-              {username.charAt(0)}
+          <div
+            key={u.id}
+            className="flex items-center bg-gray-100 p-4 rounded-lg"
+          >
+            <div className="w-10 h-10 bg-teal-400 text-white flex items-center justify-center rounded-full mr-2">
+              {u.username.charAt(0)}
             </div>
-            <a href={`${path}/${currentUser.id}`} className="text-teal-500 font-bold text-lg">
-              {currentUser.username}
+            <a
+              href={`${path}/${u.id}`}
+              className="text-teal-600 font-bold text-lg hover:underline"
+            >
+              {u.username}
             </a>
           </div>
         );

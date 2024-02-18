@@ -1,5 +1,10 @@
-import { SignIn } from "@clerk/nextjs"
+"use client";
+import { resetState } from "@/redux/features/state-slice";
+import { SignIn } from "@clerk/nextjs";
+import { useDispatch } from "react-redux";
 
 export default function Page() {
-    return <SignIn />
+  const dispatch = useDispatch();
+  dispatch(resetState());
+  return <SignIn />;
 }

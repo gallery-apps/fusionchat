@@ -3,7 +3,6 @@
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { usePathname, useRouter } from "next/navigation";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -22,25 +21,17 @@ const formSchema = z.object({
   }),
 });
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import { UserValidation } from "@/lib/valiadations/user";
-import { updateUser } from "@/lib/actions/user.actions";
+import { updateUser } from "@/app/api/user";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserId, selectUserName, setOnboarded, setUserId } from "@/redux/features/state-slice";
 
-interface Props {
-  user: {
-    id: string;
-    objectId: string;
-    username: string;
-    name: string;
-    image: string;
-  };
-  btnTitle: string;
-}
-
-const Profile = ({ user }: Props) => {
+const Profile = () => {
   const pathname = usePathname();
   const router = useRouter();
-
+  const dispatch = useDispatch();
+  const userId = useSelector(selectUserId);
+  const userName = useSelector(selectUserName);
   const form = useForm({
     //resolver: zodResolver(UserValidation),
     defaultValues: {
@@ -50,13 +41,17 @@ const Profile = ({ user }: Props) => {
   });
 
   const onSubmit = async (values: z.infer<typeof UserValidation>) => {
-    await updateUser({
-      id: user.id,
+    const currentUser = {
+      id: userId,
       name: values.name,
       username: values.username,
       image: "",
       path: pathname,
-    });
+      onboarded: true,
+    };
+    dispatch(setUserId(currentUser.id));
+    dispatch(setOnboarded(true));
+    await updateUser(currentUser);
 
     if (pathname === "/profile/edit") {
       router.back();

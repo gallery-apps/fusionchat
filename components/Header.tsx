@@ -4,15 +4,14 @@ import VideocamOutlinedIcon from "@mui/icons-material/VideocamOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import { ClickAwayListener, IconButton } from "@mui/material";
-import { User } from "@/lib/actions/user.actions";
+import { IconButton } from "@mui/material";
 
-function Header({ user }: { user: User }) {
+function Header({ userName }: { userName: string }) {
   return (
-    <div className="w-full sticky top-0 p-2 h-20 bg-gray-200 border-b border-gray-400 z-10 flex items-center justify-between">
-      <div className="text-black"> 
+    <div className="w-full bg-gray-200 border-b border-gray-400 shadow-md p-4 flex items-center justify-between">
+      <div className="text-black flex items-center">
         <AccountCircleIcon />
-        {user.username}
+        <span className="ml-2">{userName}</span>
       </div>
       <div className="flex gap-6 items-center">
         <IconButton>
@@ -21,7 +20,7 @@ function Header({ user }: { user: User }) {
         <IconButton>
           <LocalPhoneOutlinedIcon />
         </IconButton>
-        |
+        <span className="text-gray-600">|</span>
         <IconButton>
           <SearchOutlinedIcon />
         </IconButton>
@@ -34,4 +33,3 @@ function Header({ user }: { user: User }) {
 }
 
 export default Header;
-

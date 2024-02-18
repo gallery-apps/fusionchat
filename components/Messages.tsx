@@ -1,18 +1,14 @@
 "use client";
 import * as z from "zod";
 import React from "react";
-
 import { useForm } from "react-hook-form";
-import { createMessage } from "@/lib/actions/message.actions";
+import { createMessage } from "@/app/api/message";
 import { usePathname } from "next/navigation";
 import { MessageValidation } from "@/lib/valiadations/message";
 import Header from "./Header";
 import {
   Form,
-  FormControl,
   FormField,
-  FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
@@ -22,16 +18,17 @@ import { Message, User } from "@prisma/client/index.js";
 
 function Messages({
   userId,
-  userName,
   recipient,
-  messages,
+  userMessages,
+  updateMessages,
 }: {
-    userId: string;
-  userName: string;
-  recipient: User;
-  messages: Message[];
+  userId: string;
+  recipient: User | null;
+  userMessages: Message[];
+  updateMessages: () => void;
 }) {
   const pathname = usePathname();
+
   const form = useForm({
     //resolver: zodResolver(UserValidation),
     defaultValues: {
@@ -40,6 +37,7 @@ function Messages({
   });
 
   const onSubmit = async (values: z.infer<typeof MessageValidation>) => {
+    if (!recipient) return;
     await createMessage({
       senderId: userId,
       recipientId: recipient.id,
@@ -47,33 +45,38 @@ function Messages({
       path: pathname,
     });
     form.reset();
+    updateMessages();
   };
 
+  if (!recipient) return null;
   return (
     <div className="z-10 m-6 inherit">
-      <Header user={recipient} />
-      <HistoryMessages messages={messages} userId={userId} />
+      <Header userName={recipient.username} />
+      <HistoryMessages messages={userMessages} userId={userId} />
       <Form {...form}>
         <form
-          className="mt-10 flex flex-col justify-start gap-10"
+          className="mt-10 flex flex-col justify-start gap-2"
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <FormField
             control={form.control}
             name="messageContent"
             render={({ field }) => (
-              <FormItem className="flex w-full flex-col gap-3">
-                <FormLabel className="text-base-semibold text-light-2">
+              <div className="flex w-full flex-col gap-3">
+                <label className="text-base-semibold text-light-2">
                   Content
-                </FormLabel>
-                <FormControl className="no-focus border border-dark-4 bg-dark-3 text-dark-1">
-                  <Textarea className="text-black" rows={15} {...field} />
-                </FormControl>
+                </label>
+                <div className="bg-gray-200 p-4 rounded-md">
+                  <Textarea className="text-black" rows={5} {...field} />
+                </div>
                 <FormMessage />
-              </FormItem>
+              </div>
             )}
           />
-          <Button type="submit" className="bg-primary-500">
+          <Button
+            type="submit"
+            className="bg-teal-500 text-white font-bold py-2 px-4 rounded max-w-[65px] self-end"
+          >
             Send
           </Button>
         </form>
